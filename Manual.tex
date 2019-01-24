@@ -288,7 +288,7 @@ Some rules you should follow, if you want to make a pull request to the master b
 
 \subsection{File/Function/Variable names are important}
 
-Please, spend at least 10 minutes before you create a new file/function/variable.
+Let's spend enough time for naming our new file/function/variable...
 Good naming makes programming efficient.
 
 \subsection{Equality operator between float or double}
@@ -322,7 +322,6 @@ Result is \textbf{Value : 1}.
 It works properly if you change \textbf{float GetFatJetSF(float tau21cut)} to \textbf{float GetFatJetSF(double tau21cut)}.
 However, it is NOT recommended to apply equality operator between floats.
 If you really need it, you can do $|A-B|<e$ with a very small $e$ $($e.g., 0.001$)$.
-Similarly, never do \textbf{if(value == -999.)\{ ... \}}.
 
 \subsection{std::map is good, but be careful}
 
