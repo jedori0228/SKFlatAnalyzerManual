@@ -17,6 +17,7 @@
   keepspaces=true,
   showstringspaces=false,
 }
+\usepackage{amsmath}
 
 \title{SKFlatAnalyzer User Guide}
 \author{Jae Sung Kim  \\
@@ -338,5 +339,12 @@ To save your time, you can add a ``\#" at the beginning of each lines in ``\href
 \centerline{$\downarrow$}
 \centerline{\#ID SF NUM\_MediumID\_DEN\_genTracks RunAveraged\_SF\_ID.root NUM\_MediumID\_DEN\_genTracks\_eta\_pt}
 Then histogram for Medium ID will not be saved in the histmap.
+
+\subsection{When using random variables..}
+
+Some functions use random variables (e.g., smearing from a distribution).
+If you use default random seed, your results can be changed everytime you run the analyzer.
+Easiest way to avoid this issue is using a combination of RunNumber and EventNumber as a seed.
+E.g., $\text{seed} = \text{RunNumber} \times 1000000000 + \text{EventNumber}$.
 
 \end{document}
