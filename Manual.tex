@@ -217,6 +217,34 @@ Initializing branch element variables
 
 Script for batch job submission
 
+\subsection{Simple way for debugging}
+
+When debugging, it is better use the master node rather than using batch system.
+Here is a quick intstruction to create a debugging macro script.
+
+Let's say you want to debug `MyAnalzyer'.
+Then, run (-n 10 can be any number) : \\
+\centerline{SKFlayt.py -a MyAnalzyer -n 10 -i $<$sample$>$ -y $<$year$>$ $--$no\_exec}
+Go to the job directory. It should be : \\
+\$SKFlatRunlogDir/$<$MyAnalzyer\_\_$<$TIMESTAMP$>$\_\_Year$<$year$>$\_\_$<$sample$>$\_\_$<$machine$>$
+If in KISTI, you will have run\_XYZ.C's.
+If in SNU or KNU, you will have job\_XYZ/run.C's.
+Copy one of them (let's call it as ``run.C") to \$SKFlat\_WD.
+If SNU or KNU, edit the path for libDataFormats.so and libAnalyzers.so as follows;
+\begin{lstlisting}
+R__LOAD_LIBRARY(./lib/libDataFormats.so)
+R__LOAD_LIBRARY(./lib/libAnalyzers.so)
+\end{lstlisting}
+Now, ``run.C" uses the libraries in \$SKFlat\_WD/lib, which is updated when you run ``make".
+So, edit your codes, compile, and then do ``root -l -b -q run.C" in \$SKFlat\_WD.
+
+Here are some useful lines you can add in ``run.C" :
+\begin{itemize}
+\item ``m.MaxEvent $=$ 1000;" : run 1000 events only
+\item ``m.NSkipEvent $=$ 10;" : skip first 10 events, and then run ``m.MaxEvent" events. If ``m.MaxEvent" is not set, run to the end.
+\item ``m.LogEvery $=$ 2" : print current event number for every 2 events.
+\end{itemize}
+
 \clearpage
 
 \section{Macro run order}
